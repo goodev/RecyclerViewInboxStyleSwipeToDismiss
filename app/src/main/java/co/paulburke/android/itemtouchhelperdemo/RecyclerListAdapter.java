@@ -137,6 +137,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 //            frontView.setAlpha(alpha);
             frontView.setTranslationX(dX);
             if (dX > 0) {
+                backView.setBackgroundColor(Color.CYAN);
                 leftIcon.setTranslationX(Math.min(0, dX - leftIcon.getRight()));
                 if (dX > leftIcon.getLeft()) {
                     leftIcon.setRotationY(Math.min(0, dX - leftIcon.getRight()) / (float) leftIcon.getWidth() * 90);
@@ -144,6 +145,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
                     leftIcon.setRotationY(-90);
                 }
             } else if (dX < 0) {
+                backView.setBackgroundColor(Color.MAGENTA);
                 int margin = backView.getWidth() - rightIcon.getRight();
                 rightIcon.setTranslationX(Math.max(0, dX + rightIcon.getWidth() + margin));
                 if (-dX > margin) {
