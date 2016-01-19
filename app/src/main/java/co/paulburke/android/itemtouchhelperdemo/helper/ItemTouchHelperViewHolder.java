@@ -38,4 +38,6 @@ public interface ItemTouchHelperViewHolder {
      * state should be cleared.
      */
     void onItemClear();
+
+    void onChildDraw(float dX, float dY, int actionState, boolean isCurrentlyActive);
 }

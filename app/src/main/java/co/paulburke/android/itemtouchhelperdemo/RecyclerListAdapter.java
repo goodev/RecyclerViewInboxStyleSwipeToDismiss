@@ -104,21 +104,54 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
         public final TextView textView;
         public final ImageView handleView;
+        public final View backView;
+        public final View frontView;
+        public final View leftIcon;
+        public final View rightIcon;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.text);
             handleView = (ImageView) itemView.findViewById(R.id.handle);
+            backView = itemView.findViewById(R.id.backView);
+            leftIcon = itemView.findViewById(R.id.leftIcon);
+            rightIcon = itemView.findViewById(R.id.rightIcon);
+            frontView = itemView.findViewById(R.id.item);
         }
 
         @Override
         public void onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY);
+            frontView.setBackgroundColor(Color.LTGRAY);
+            backView.setVisibility(View.VISIBLE);
         }
 
         @Override
         public void onItemClear() {
-            itemView.setBackgroundColor(0);
+            frontView.setBackgroundColor(0);
+            backView.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onChildDraw(float dX, float dY, int actionState, boolean isCurrentlyActive) {
+//            final float alpha = 1f - Math.abs(dX) / (float) frontView.getWidth();
+//            frontView.setAlpha(alpha);
+            frontView.setTranslationX(dX);
+            if (dX > 0) {
+                leftIcon.setTranslationX(Math.min(0, dX - leftIcon.getRight()));
+                if (dX > leftIcon.getLeft()) {
+                    leftIcon.setRotationY(Math.min(0, dX - leftIcon.getRight()) / (float) leftIcon.getWidth() * 90);
+                } else {
+                    leftIcon.setRotationY(-90);
+                }
+            } else if (dX < 0) {
+                int margin = backView.getWidth() - rightIcon.getRight();
+                rightIcon.setTranslationX(Math.max(0, dX + rightIcon.getWidth() + margin));
+                if (-dX > margin) {
+                    rightIcon.setRotationY(Math.max(0, dX + rightIcon.getWidth() + margin) / (float) rightIcon.getWidth() * 90);
+                } else {
+                    rightIcon.setRotationY(90);
+                }
+            }
         }
     }
 }

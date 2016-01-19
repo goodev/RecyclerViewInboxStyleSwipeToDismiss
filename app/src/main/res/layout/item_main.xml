@@ -14,26 +14,58 @@
   ~ limitations under the License.
   -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item"
+    android:id="@+id/itemRoot"
     android:layout_width="match_parent"
-    android:layout_height="?listPreferredItemHeight"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?selectableItemBackground">
+    android:layout_height="?listPreferredItemHeight">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/handle"
-        android:layout_width="?listPreferredItemHeight"
+    <FrameLayout
+        android:id="@+id/backView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_vertical|right"
-        android:scaleType="center"
-        android:src="@drawable/ic_reorder_grey_500_24dp" />
+        android:background="@android:color/holo_green_light"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/leftIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="24dp"
+            android:src="@android:drawable/stat_sys_warning"
+            android:tint="@android:color/holo_red_dark" />
+
+        <ImageView
+            android:id="@+id/rightIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="24dp"
+            android:src="@android:drawable/stat_notify_more"
+            android:tint="@android:color/holo_orange_dark" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="?listPreferredItemHeight"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/handle"
+            android:layout_width="?listPreferredItemHeight"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|right"
+            android:scaleType="center"
+            android:src="@drawable/ic_reorder_grey_500_24dp" />
+    </FrameLayout>
 </FrameLayout>
